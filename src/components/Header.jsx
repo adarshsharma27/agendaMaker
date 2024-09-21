@@ -34,6 +34,12 @@ const Header = () => {
             >
               Create Agenda
             </NavLink>
+            <NavLink
+              to="/view"
+              className="mr-5 hover:text-rose-600 dark:text-white font-semibold"
+            >
+              View Agenda
+            </NavLink>
 
             <NavLink
               to="/aboutus"
@@ -114,6 +120,13 @@ const Header = () => {
               onClick={() => toggleNavigation()}
             >
               Create Agenda
+            </NavLink>
+            <NavLink
+              to="/view"
+              className="hover:text-rose-600 dark:text-white py-2 border-b-2 w-10/12 border-gray-500  hover:border-rose-500  font-semibold"
+              onClick={() => toggleNavigation()}
+            >
+              View Agenda
             </NavLink>
             <NavLink
               to="/signup"

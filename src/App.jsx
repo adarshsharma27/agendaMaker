@@ -6,6 +6,7 @@ import CreateAgenda from "./components/CreateAgenda";
 import AboutUs from "./components/AboutUs";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import ViewAgenda from "./components/ViewAgenda";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<CreateAgenda />} />
+        <Route path="/view" element={<ViewAgenda />} />
         <Route path="/aboutus" element={<AboutUs />} />
       </Routes>
 
