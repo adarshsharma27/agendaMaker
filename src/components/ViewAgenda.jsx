@@ -13,8 +13,8 @@ const ViewAgenda = () => {
             isViewModalOpen={isViewModalOpen}
             setIsViewModalOpen={setIsViewModalOpen}
             setIsUpdateModalOpen={setIsUpdateModalOpen}
-            isDeleteModalOpen={isDeleteModalOpen}
             isUpdateModalOpen={isUpdateModalOpen}
+            isDeleteModalOpen={isDeleteModalOpen}
             setIsDeleteModalOpen={setIsDeleteModalOpen}
           />
           <AgendaCard />

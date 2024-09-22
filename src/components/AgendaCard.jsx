@@ -12,6 +12,12 @@ const AgendaCard = ({
   isDeleteModalOpen,
   setIsDeleteModalOpen,
 }) => {
+  const handleUpdate=()=>{
+    alert("Update")
+  }
+  const handleDelete=()=>{
+    alert("Delete")
+  }
   return (
     <>
       <article className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6 font-baijamjuree">
@@ -73,6 +79,7 @@ const AgendaCard = ({
         setIsOpen={setIsUpdateModalOpen}
         submitBtnText={"Confirm"}
         cancelBtnText={"Cancel"}
+        handleSubmit={handleUpdate}
       >
         <UpdateAgenda />
       </Modal>
@@ -81,6 +88,7 @@ const AgendaCard = ({
         setIsOpen={setIsDeleteModalOpen}
         submitBtnText={"Confirm"}
         cancelBtnText={"Cancel"}
+        handleSubmit={handleDelete}
       >
         <DeleteAgenda />
       </Modal>
