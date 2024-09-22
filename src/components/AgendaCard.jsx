@@ -60,13 +60,28 @@ const AgendaCard = ({
           />
         </div>
       </article>
-      <Modal isOpen={isViewModalOpen} setIsOpen={setIsViewModalOpen}>
+      <Modal
+        isOpen={isViewModalOpen}
+        setIsOpen={setIsViewModalOpen}
+        submitBtnText={""}
+        cancelBtnText={""}
+      >
         <SingleAgenda />
       </Modal>
-      <Modal isOpen={isUpdateModalOpen} setIsOpen={setIsUpdateModalOpen}>
+      <Modal
+        isOpen={isUpdateModalOpen}
+        setIsOpen={setIsUpdateModalOpen}
+        submitBtnText={"Confirm"}
+        cancelBtnText={"Cancel"}
+      >
         <UpdateAgenda />
       </Modal>
-      <Modal isOpen={isDeleteModalOpen} setIsOpen={setIsDeleteModalOpen}>
+      <Modal
+        isOpen={isDeleteModalOpen}
+        setIsOpen={setIsDeleteModalOpen}
+        submitBtnText={"Confirm"}
+        cancelBtnText={"Cancel"}
+      >
         <DeleteAgenda />
       </Modal>
     </>

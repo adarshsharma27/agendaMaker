@@ -68,14 +68,6 @@ const UpdateAgenda = () => {
             // handleChange={handleChange}
           />
         </div>
-        <div className="flex justify-end gap-4">
-          <button className="block md:w-1/4   rounded px-8 py-3 text-base font-bold text-gray-600 shadow hover:text-rose-500 focus:outline-none focus:ring active:text-rose-500">
-            Cancel
-          </button>
-          <button className="block  md:w-1/4  rounded-lg bg-rose-600 px-8 py-3 text-base font-bold text-white hover:bg-rose-500 focus:outline-none focus:ring active:bg-rose-500">
-            Create
-          </button>
-        </div>
       </div>
     </>
   );
