@@ -1,7 +1,17 @@
 import React from "react";
 import { LuPenSquare, LuTrash, LuView } from "react-icons/lu";
-
-const AgendaCard = () => {
+import Modal from "./Modal";
+import UpdateAgenda from "./UpdateAgenda";
+import DeleteAgenda from "./DeleteAgenda";
+import SingleAgenda from "./SingleAgenda";
+const AgendaCard = ({
+  isViewModalOpen,
+  setIsViewModalOpen,
+  isUpdateModalOpen,
+  setIsUpdateModalOpen,
+  isDeleteModalOpen,
+  setIsDeleteModalOpen,
+}) => {
   return (
     <>
       <article className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6 font-baijamjuree">
@@ -33,11 +43,32 @@ const AgendaCard = () => {
           dolores, possimus pariatur
         </p>
         <div className="flex justify-end gap-2">
-          <LuView size={32} className="text-slate-500 cursor-pointer" />
-          <LuPenSquare size={32} className="text-sky-600 cursor-pointer" />
-          <LuTrash size={32} className="text-red-600 cursor-pointer" />
+          <LuView
+            size={32}
+            className="text-slate-500 cursor-pointer"
+            onClick={() => setIsViewModalOpen(true)}
+          />
+          <LuPenSquare
+            size={32}
+            className="text-sky-600 cursor-pointer"
+            onClick={() => setIsUpdateModalOpen(true)}
+          />
+          <LuTrash
+            size={32}
+            className="text-red-600 cursor-pointer"
+            onClick={() => setIsDeleteModalOpen(true)}
+          />
         </div>
       </article>
+      <Modal isOpen={isViewModalOpen} setIsOpen={setIsViewModalOpen}>
+        <SingleAgenda />
+      </Modal>
+      <Modal isOpen={isUpdateModalOpen} setIsOpen={setIsUpdateModalOpen}>
+        <UpdateAgenda />
+      </Modal>
+      <Modal isOpen={isDeleteModalOpen} setIsOpen={setIsDeleteModalOpen}>
+        <DeleteAgenda />
+      </Modal>
     </>
   );
 };
