@@ -8,9 +8,14 @@ const Modal = ({
   submitBtnText,
   children,
 }) => {
+  const handleClickOutside=(e)=>{
+    if (e.target.className.includes("modal-backdrop")) {
+      setIsOpen(false);
+  }
+}
   return (
     isOpen && (
-      <div className="font-baijamjuree fixed top-0 left-0  flex justify-center items-center	 shadow-2xl z-99 w-full h-full bg-[#0000002b]">
+      <div className="modal-backdrop font-baijamjuree fixed top-0 left-0  flex justify-center items-center	 shadow-2xl z-99 w-full h-full bg-[#0000002b]" onClick={handleClickOutside}>
         <div className="mx-auto w-10/12 d-flex justify-center items-center bg-white rounded-lg p-4 shadow-2xl">
           <div className="flex justify-end">
             <LuXSquare
