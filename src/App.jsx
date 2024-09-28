@@ -7,8 +7,16 @@ import AboutUs from "./components/AboutUs";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import ViewAgenda from "./components/ViewAgenda";
+import { account } from "./config/config";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const deletePreviousSession = async () => {
+      await account.deleteSession("current");
+    };
+    deletePreviousSession();
+  }, []);
   return (
     <>
       <Header />

@@ -1,65 +1,97 @@
 import React, { useState } from "react";
 import FormField from "./FormField";
-
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import conf, { ID, account, databases } from "../config/config";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+const SignUpSchema = z.object({
+  name: z
+    .string()
+    .min(4, { message: "Name is too short" })
+    .max(20, { message: "Name is too long" }),
+  email: z.string().email({ message: "Email is not Proper" }),
+  password: z
+    .string()
+    .min(8, { message: "Password is too short" })
+    .max(20, { message: "Password is too long" }),
+});
 const SignUp = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    password: "",
-  });
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(SignUpSchema) });
+  const handleSignUp = async (data) => {
+    const { name, email, password } = data;
+    const created = moment(new Date()).format("MMM Do YYYY, h:mm:ss a");
+    console.log(created);
+    try {
+      const response = await account.create(ID.unique(), email, password, name);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+      if (response) {
+        await databases.createDocument(
+          conf.databaseId,
+          conf.usersCollectionId,
+          response?.$id,
+          {
+            name,
+            email,
+            created,
+          }
+        );
+      }
+      navigate("/login");
+    } catch (error) {}
   };
+
   return (
     <>
       <div className="mx-auto max-w-screen-xl px-4 py-6 sm:px-6 lg:px-8 font-baijamjuree">
         <div className="mx-auto max-w-lg">
-          
-
-         
-
           <div className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
-          <h1 className="text-center text-3xl font-bold text-rose-600 sm:text-3xl">
-           SignIn
-          </h1>
-            <FormField
-              label="Name"
-              name="name"
-              placeholder="Please Enter Name"
-              type="text"
-              value={formData?.name}
-              handleChange={handleChange}
-            />
-            <FormField
-              label="Email"
-              name="email"
-              placeholder="Please Enter Email"
-              type="email"
-              value={formData?.email}
-              handleChange={handleChange}
-            />
-            <FormField
-              label="Password"
-              name="password"
-              placeholder="Please Enter Password"
-              type="password"
-              value={formData?.password}
-              handleChange={handleChange}
-            />
-            <button
-              type="submit"
-              className="block w-full rounded-lg bg-rose-600 px-5 py-3 text-base font-bold text-white hover:bg-rose-500 focus:outline-none focus:ring active:bg-rose-500"
-            >
-              Sign in
-            </button>
-
+            <h1 className="text-center text-3xl font-bold text-rose-600 sm:text-3xl">
+              SignIn
+            </h1>
+            <form onSubmit={handleSubmit(handleSignUp)}>
+              <FormField
+                label="Name"
+                name="name"
+                placeholder="Please Enter Name"
+                type="text"
+                register={register}
+                error={errors.name}
+              />
+              <FormField
+                label="Email"
+                name="email"
+                placeholder="Please Enter Email"
+                type="email"
+                register={register}
+                error={errors.email}
+              />
+              <FormField
+                label="Password"
+                name="password"
+                placeholder="Please Enter Password"
+                type="password"
+                register={register}
+                error={errors.password}
+              />
+              <button
+                type="submit"
+                disabled={errors.name || errors.email || errors.password}
+                className="block w-full rounded-lg bg-rose-600 px-5 py-3 text-base font-bold text-white hover:bg-rose-500 focus:outline-none focus:ring active:bg-rose-500 disabled:bg-rose-400 disabled:cursor-not-allowed"
+              >
+                Sign in
+              </button>
+            </form>
             <p className="text-center text-base text-gray-500">
-              No account?
+              Already have Account?
               <a className="underline text-rose-500 pl-2" href="#">
-                Sign up
+                LogIn
               </a>
             </p>
           </div>

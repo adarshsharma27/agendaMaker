@@ -9,6 +9,8 @@ const FormField = ({
   handleChange,
   icon,
   options = [],
+  register,
+  error,
 }) => {
   console.log(options);
   return (
@@ -39,26 +41,26 @@ const FormField = ({
         </div>
       ) : type === "select" ? (
         <div>
-        <label
+          <label
             className="font-semibold text-gray-500 font-baijamjuree"
             htmlFor={name}
           >
             {label}
           </label>
-        <select
-          name={name}
-          type={type}
-          className="w-full rounded-lg text-gray-400 border-gray-200 p-4 pe-12 text-base font-baijamjuree shadow-sm"
-          value={value}
-          onChange={handleChange}
-        >
-          <option value="">{placeholder}</option>
-          {options?.map((option) => (
-            <option className="" value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+          <select
+            name={name}
+            type={type}
+            className="w-full rounded-lg text-gray-400 border-gray-200 p-4 pe-12 text-base font-baijamjuree shadow-sm"
+            value={value}
+            onChange={handleChange}
+          >
+            <option value="">{placeholder}</option>
+            {options?.map((option) => (
+              <option className="" value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
       ) : (
         <div>
@@ -75,10 +77,13 @@ const FormField = ({
               type={type}
               className="w-full rounded-lg text-gray-600 border-gray-200 p-4 pe-12 text-base font-baijamjuree shadow-sm"
               placeholder={placeholder}
-              value={value}
-              onChange={handleChange}
+              {...register(name)}
             />
-
+            {error && (
+              <span className="text-red-400 py-2 font-semibold">
+                {error.message}
+              </span>
+            )}
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
               {icon}
             </span>
