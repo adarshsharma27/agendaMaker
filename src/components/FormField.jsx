@@ -5,14 +5,11 @@ const FormField = ({
   name,
   type,
   placeholder,
-  value,
-  handleChange,
   icon,
   options = [],
   register,
   error,
 }) => {
-  console.log(options);
   return (
     <>
       {type === "description" ? (
@@ -30,10 +27,13 @@ const FormField = ({
               type={type}
               className="w-full h-36 rounded-lg text-gray-600 border-gray-200 p-4 pe-12 text-base font-baijamjuree shadow-sm"
               placeholder={placeholder}
-              value={value}
-              onChange={handleChange}
+              {...register(name)}
             />
-
+            {error && (
+              <span className="text-red-400 py-2 font-semibold">
+                {error.message}
+              </span>
+            )}
             <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
               {icon}
             </span>
@@ -51,8 +51,7 @@ const FormField = ({
             name={name}
             type={type}
             className="w-full rounded-lg text-gray-400 border-gray-200 p-4 pe-12 text-base font-baijamjuree shadow-sm"
-            value={value}
-            onChange={handleChange}
+            {...register(name)}
           >
             <option value="">{placeholder}</option>
             {options?.map((option) => (
@@ -61,6 +60,11 @@ const FormField = ({
               </option>
             ))}
           </select>
+          {error && (
+            <span className="text-red-400 py-2 font-semibold">
+              {error.message}
+            </span>
+          )}
         </div>
       ) : (
         <div>

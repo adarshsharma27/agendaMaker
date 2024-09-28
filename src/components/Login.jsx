@@ -92,7 +92,7 @@ const Login = () => {
               </button>
               <button
                 onClick={loginAsGuest}
-                className="block w-full rounded-lg  bg-slate-700  px-5 py-3 text-base font-bold text-white  focus:outline-none focus:ring"
+                className="block w-full rounded-lg  bg-slate-700  px-5 py-3 text-base font-bold text-white  focus:outline-none focus:ring disabled:bg-slate-600 disabled:cursor-not-allowed"
               >
                 LogIn As Guest
               </button>
