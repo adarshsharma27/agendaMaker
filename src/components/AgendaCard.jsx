@@ -11,16 +11,23 @@ const AgendaCard = ({
   setIsUpdateModalOpen,
   isDeleteModalOpen,
   setIsDeleteModalOpen,
+  $id,
+  title,
+  label,
+  category,
+  topics,
+  description,
+  createdAt,
 }) => {
-  const handleUpdate=()=>{
-    alert("Update")
-  }
-  const handleDelete=()=>{
-    alert("Delete")
-  }
+  const handleUpdate = () => {
+    alert("Update");
+  };
+  const handleDelete = () => {
+    alert("Delete");
+  };
   return (
     <>
-      <article className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6 font-baijamjuree">
+      <article className="rounded-lg  border border-gray-100 bg-white p-4  shadow-sm transition hover:shadow-lg sm:p-6 font-baijamjuree">
         <span className="inline-block rounded bg-rose-600 p-2 text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,15 +47,12 @@ const AgendaCard = ({
           </svg>
         </span>
 
-        <h3 className="mt-0.5 text-lg font-bold text-gray-900">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </h3>
-
-        <p className="mt-2 line-clamp-3 text-base text-gray-500">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-          dolores, possimus pariatur
-        </p>
-        <div className="flex justify-end gap-2">
+        <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+        <span className="inline-flex my-1 items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
+          <p className="whitespace-nowrap text-sm">{category}</p>
+        </span>
+        <p className="pb-2 text-base text-gray-500 truncate">{description}</p>
+        <div className="flex justify-start gap-2">
           <LuView
             size={32}
             className="text-slate-500 cursor-pointer"
@@ -72,7 +76,7 @@ const AgendaCard = ({
         submitBtnText={""}
         cancelBtnText={""}
       >
-        <SingleAgenda />
+        <SingleAgenda id={$id} />
       </Modal>
       <Modal
         isOpen={isUpdateModalOpen}
