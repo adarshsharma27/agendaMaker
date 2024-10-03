@@ -90,7 +90,7 @@ const CreateAgenda = () => {
 
   return (
     <>
-      <div className="mx-auto max-w-screen-xl px-4 py-6 sm:px-6 lg:px-8 font-baijamjuree">
+      <div className="container px-6 py-6 mx-auto font-baijamjuree">
         <div className="mx-auto max-w-5xl">
           <h1 className="text-center text-3xl font-bold text-rose-600 sm:text-3xl">
             Create Agenda

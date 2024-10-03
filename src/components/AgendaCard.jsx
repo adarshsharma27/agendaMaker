@@ -27,7 +27,7 @@ const AgendaCard = ({
   };
   return (
     <>
-      <article className="rounded-lg  border border-gray-100 bg-white p-4  shadow-sm transition hover:shadow-lg sm:p-6 font-baijamjuree">
+      <article className="rounded-lg break-words border border-gray-100 bg-white p-4  shadow-sm transition hover:shadow-lg sm:p-6 font-baijamjuree">
         <span className="inline-block rounded bg-rose-600 p-2 text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +51,9 @@ const AgendaCard = ({
         <span className="inline-flex my-1 items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
           <p className="whitespace-nowrap text-sm">{category}</p>
         </span>
-        <p className="pb-2 text-base text-gray-500 truncate">{description}</p>
+        <p className="pb-2 text-base text-gray-500">
+          {description?.slice(0, 100)}...
+        </p>
         <div className="flex justify-start gap-2">
           <LuView
             size={32}
