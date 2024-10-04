@@ -20,7 +20,7 @@ const ViewAgenda = () => {
       } catch (error) {}
     };
     getAllAgendas();
-  }, [isViewModalOpen]);
+  }, []);
   return (
     <>
       <div className="container px-6 py-12 mx-auto font-baijamjuree">

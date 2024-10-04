@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LuPenSquare, LuTrash, LuView } from "react-icons/lu";
 import Modal from "./Modal";
 import UpdateAgenda from "./UpdateAgenda";
@@ -19,15 +19,26 @@ const AgendaCard = ({
   description,
   createdAt,
 }) => {
+  useEffect(() => {
+    if (isViewModalOpen === false) setSingleAgendaId("");
+  }, [isViewModalOpen]);
+  const [singleAgendaId, setSingleAgendaId] = useState("");
   const handleUpdate = () => {
     alert("Update");
   };
   const handleDelete = () => {
     alert("Delete");
   };
+  const handleSingleAgenda = (id) => {
+    setSingleAgendaId(id);
+    setIsViewModalOpen(true);
+  };
   return (
     <>
-      <article className="rounded-lg break-words border border-gray-100 bg-white p-4  shadow-sm transition hover:cursor-pointer hover:shadow-lg sm:p-6 font-baijamjuree">
+      <article
+        className="rounded-lg break-words border border-gray-100 bg-white p-4  shadow-sm transition hover:cursor-pointer hover:shadow-lg sm:p-6 font-baijamjuree"
+        key={$id}
+      >
         <span className="inline-block rounded bg-rose-600 p-2 text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +72,7 @@ const AgendaCard = ({
           <LuView
             size={32}
             className="text-slate-500 cursor-pointer"
-            onClick={() => setIsViewModalOpen(true)}
+            onClick={() => handleSingleAgenda($id)}
           />
           <LuPenSquare
             size={32}
@@ -75,14 +86,16 @@ const AgendaCard = ({
           />
         </div>
       </article>
-      <Modal
-        isOpen={isViewModalOpen}
-        setIsOpen={setIsViewModalOpen}
-        submitBtnText={""}
-        cancelBtnText={""}
-      >
-        <SingleAgenda id={$id} />
-      </Modal>
+      {singleAgendaId && (
+        <Modal
+          isOpen={isViewModalOpen}
+          setIsOpen={setIsViewModalOpen}
+          submitBtnText={""}
+          cancelBtnText={""}
+        >
+          <SingleAgenda id={singleAgendaId} />
+        </Modal>
+      )}
       <Modal
         isOpen={isUpdateModalOpen}
         setIsOpen={setIsUpdateModalOpen}

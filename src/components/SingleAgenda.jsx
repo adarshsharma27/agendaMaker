@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import conf, { databases } from "../config/config";
+import { LuTags } from "react-icons/lu";
 
-const SingleAgenda = () => {
+const SingleAgenda = ({ id }) => {
+  console.log(id, "single");
+  const [agenda, setSingleAgenda] = useState([]);
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const resp = await databases.getDocument(
+          conf.databaseId,
+          conf.collectionId,
+          id
+        );
+
+        setSingleAgenda(resp);
+      } catch (error) {}
+    };
+    getProduct();
+  }, [id]);
+  console.log(agenda?.topics);
   return (
     <>
       <article className="py-4 font-baijamjuree">
@@ -23,21 +42,29 @@ const SingleAgenda = () => {
           </svg>
         </span>
 
-        <h3 className="mt-0.5 text-lg font-bold text-gray-900">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        <h3 className="mt-2 text-lg font-bold text-gray-900">
+          {agenda?.title}
         </h3>
-
-        <p className="mt-2 line-clamp-3 text-base text-gray-500">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-          dolores, possimus pariatur
-        </p>
-        <p className="mt-2 line-clamp-3 text-base text-gray-500">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-          dolores, possimus pariatur
-        </p>
-        <p className="mt-2 line-clamp-3 text-base text-gray-500">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
-          dolores, possimus pariatur
+        <div className="flex gap-2 mt-2">
+          <span className="inline-flex items-center justify-center rounded bg-rose-500 px-2.5 py-0.5 text-white">
+            <p className="whitespace-nowrap text-base">{agenda?.label}</p>
+          </span>
+          <span className="inline-flex  items-center justify-center rounded bg-slate-200 px-2.5 py-0.5 text-rose-600">
+            <p className="whitespace-nowrap text-base">{agenda?.category}</p>
+          </span>
+        </div>
+        <div className="mt-2">
+          {agenda?.topics?.map((topic) => (
+            <div className="flex items-center justify-start pl-2 mt-1 gap-1 rounded py-3 text-base font-bold text-gray-600  shadow hover:text-rose-500 hover:cursor-pointer">
+              <LuTags size={22} className="text-rose-600" />
+              <span>{topic}</span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-2 text-base text-gray-500 ">{agenda?.description}</p>
+        <p className="mt-2  text-base   text-gray-500">
+          Last Updated :{" "}
+          <span className="font-semibold ">{agenda?.createdAt}</span>
         </p>
       </article>
     </>
