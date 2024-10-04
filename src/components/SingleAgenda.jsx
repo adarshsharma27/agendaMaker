@@ -6,7 +6,7 @@ const SingleAgenda = ({ id }) => {
   console.log(id, "single");
   const [agenda, setSingleAgenda] = useState([]);
   useEffect(() => {
-    const getProduct = async () => {
+    const getAgenda = async () => {
       try {
         const resp = await databases.getDocument(
           conf.databaseId,
@@ -17,7 +17,7 @@ const SingleAgenda = ({ id }) => {
         setSingleAgenda(resp);
       } catch (error) {}
     };
-    getProduct();
+    getAgenda();
   }, [id]);
   console.log(agenda?.topics);
   return (

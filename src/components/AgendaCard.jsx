@@ -22,8 +22,9 @@ const AgendaCard = ({
   getAllAgendas,
 }) => {
   useEffect(() => {
-    if (isViewModalOpen === false) setSingleAgendaId("");
-  }, [isViewModalOpen]);
+    if (isViewModalOpen === false || isUpdateModalOpen === false)
+      setSingleAgendaId("");
+  }, [isViewModalOpen, isUpdateModalOpen]);
   const [singleAgendaId, setSingleAgendaId] = useState("");
   const handleUpdate = () => {
     alert("Update");
@@ -43,13 +44,16 @@ const AgendaCard = ({
     }
   };
 
-  const handleSingleAgendaViewDelete = async (id, functionality) => {
+  const handleSingleAgendaViewUpdateDelete = async (id, functionality) => {
     if (functionality === "view") {
       setSingleAgendaId(id);
       setIsViewModalOpen(true);
     } else if (functionality === "delete") {
       setSingleAgendaId(id);
       setIsDeleteModalOpen(true);
+    } else if (functionality === "update") {
+      setSingleAgendaId(id);
+      setIsUpdateModalOpen(true);
     }
   };
 
@@ -92,17 +96,17 @@ const AgendaCard = ({
           <LuView
             size={32}
             className="text-slate-500 cursor-pointer"
-            onClick={() => handleSingleAgendaViewDelete($id, "view")}
+            onClick={() => handleSingleAgendaViewUpdateDelete($id, "view")}
           />
           <LuPenSquare
             size={32}
             className="text-sky-600 cursor-pointer"
-            onClick={() => setIsUpdateModalOpen(true)}
+            onClick={() => handleSingleAgendaViewUpdateDelete($id, "update")}
           />
           <LuTrash
             size={32}
             className="text-red-600 cursor-pointer"
-            onClick={() => handleSingleAgendaViewDelete($id, "delete")}
+            onClick={() => handleSingleAgendaViewUpdateDelete($id, "delete")}
           />
         </div>
       </article>
@@ -116,15 +120,19 @@ const AgendaCard = ({
           <SingleAgenda id={singleAgendaId} />
         </Modal>
       )}
-      <Modal
-        isOpen={isUpdateModalOpen}
-        setIsOpen={setIsUpdateModalOpen}
-        submitBtnText={"Confirm"}
-        cancelBtnText={"Cancel"}
-        handleSubmit={handleUpdate}
-      >
-        <UpdateAgenda />
-      </Modal>
+      {singleAgendaId && (
+        <Modal
+          isOpen={isUpdateModalOpen}
+          setIsOpen={setIsUpdateModalOpen}
+          submitBtnText={""}
+          cancelBtnText={""}
+          handleSubmit={handleUpdate}
+          type="update"
+        >
+          <UpdateAgenda id={singleAgendaId} />
+        </Modal>
+      )}
+
       {singleAgendaId && (
         <Modal
           isOpen={isDeleteModalOpen}
