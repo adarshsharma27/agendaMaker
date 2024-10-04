@@ -4,6 +4,7 @@ import Modal from "./Modal";
 import UpdateAgenda from "./UpdateAgenda";
 import DeleteAgenda from "./DeleteAgenda";
 import SingleAgenda from "./SingleAgenda";
+import conf, { databases } from "../config/config";
 const AgendaCard = ({
   isViewModalOpen,
   setIsViewModalOpen,
@@ -18,6 +19,7 @@ const AgendaCard = ({
   topics,
   description,
   createdAt,
+  getAllAgendas,
 }) => {
   useEffect(() => {
     if (isViewModalOpen === false) setSingleAgendaId("");
@@ -26,13 +28,31 @@ const AgendaCard = ({
   const handleUpdate = () => {
     alert("Update");
   };
-  const handleDelete = () => {
-    alert("Delete");
+  const handleDelete = async () => {
+    try {
+      await databases.deleteDocument(
+        conf.databaseId,
+        conf.collectionId,
+        singleAgendaId
+      );
+      console.log("Agenda Delete Successfully");
+      setIsDeleteModalOpen(false);
+      getAllAgendas();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
-  const handleSingleAgenda = (id) => {
-    setSingleAgendaId(id);
-    setIsViewModalOpen(true);
+
+  const handleSingleAgendaViewDelete = async (id, functionality) => {
+    if (functionality === "view") {
+      setSingleAgendaId(id);
+      setIsViewModalOpen(true);
+    } else if (functionality === "delete") {
+      setSingleAgendaId(id);
+      setIsDeleteModalOpen(true);
+    }
   };
+
   return (
     <>
       <article
@@ -72,7 +92,7 @@ const AgendaCard = ({
           <LuView
             size={32}
             className="text-slate-500 cursor-pointer"
-            onClick={() => handleSingleAgenda($id)}
+            onClick={() => handleSingleAgendaViewDelete($id, "view")}
           />
           <LuPenSquare
             size={32}
@@ -82,7 +102,7 @@ const AgendaCard = ({
           <LuTrash
             size={32}
             className="text-red-600 cursor-pointer"
-            onClick={() => setIsDeleteModalOpen(true)}
+            onClick={() => handleSingleAgendaViewDelete($id, "delete")}
           />
         </div>
       </article>
@@ -105,15 +125,17 @@ const AgendaCard = ({
       >
         <UpdateAgenda />
       </Modal>
-      <Modal
-        isOpen={isDeleteModalOpen}
-        setIsOpen={setIsDeleteModalOpen}
-        submitBtnText={"Confirm"}
-        cancelBtnText={"Cancel"}
-        handleSubmit={handleDelete}
-      >
-        <DeleteAgenda />
-      </Modal>
+      {singleAgendaId && (
+        <Modal
+          isOpen={isDeleteModalOpen}
+          setIsOpen={setIsDeleteModalOpen}
+          submitBtnText={"Confirm"}
+          cancelBtnText={"Cancel"}
+          handleSubmit={handleDelete}
+        >
+          <DeleteAgenda />
+        </Modal>
+      )}
     </>
   );
 };

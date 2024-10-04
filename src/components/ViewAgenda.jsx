@@ -8,23 +8,29 @@ const ViewAgenda = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const [allAgendas, setAllAgendas] = useState([]);
-  useEffect(() => {
-    const getAllAgendas = async () => {
-      try {
-        const resp = await databases.listDocuments(
-          conf.databaseId,
-          conf.collectionId
-        );
+  const getAllAgendas = async () => {
+    try {
+      const resp = await databases.listDocuments(
+        conf.databaseId,
+        conf.collectionId
+      );
 
-        setAllAgendas(resp?.documents);
-      } catch (error) {}
-    };
+      setAllAgendas(resp?.documents);
+    } catch (error) {}
+  };
+  useEffect(() => {
     getAllAgendas();
   }, []);
   return (
     <>
       <div className="container px-6 py-12 mx-auto font-baijamjuree">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 py-4 sm:py-0">
+        <div
+          className={`grid grid-cols-1  gap-4 py-4 sm:py-0 ${
+            (allAgendas?.length === 1 && `md:grid-cols-2 lg:grid-cols-1`) ||
+            (allAgendas?.length === 2 && `md:grid-cols-2 lg:grid-cols-2`) ||
+            (allAgendas?.length >= 3 && `md:grid-cols-3 lg:grid-cols-3`)
+          } `}
+        >
           {allAgendas.map((agenda) => {
             const {
               $id,
@@ -50,6 +56,7 @@ const ViewAgenda = () => {
                 topics={topics}
                 description={description}
                 createdAt={createdAt}
+                getAllAgendas={getAllAgendas}
               />
             );
           })}
