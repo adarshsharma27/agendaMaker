@@ -27,7 +27,7 @@ const AgendaCard = ({
   };
   return (
     <>
-      <article className="rounded-lg break-words border border-gray-100 bg-white p-4  shadow-sm transition hover:shadow-lg sm:p-6 font-baijamjuree">
+      <article className="rounded-lg break-words border border-gray-100 bg-white p-4  shadow-sm transition hover:cursor-pointer hover:shadow-lg sm:p-6 font-baijamjuree">
         <span className="inline-block rounded bg-rose-600 p-2 text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,9 +52,12 @@ const AgendaCard = ({
           <p className="whitespace-nowrap text-sm">{category}</p>
         </span>
         <p className="pb-2 text-base text-gray-500">
-          {description?.slice(0, 100)}...
+          {description?.substring(0, description.indexOf("."))}...
         </p>
-        <div className="flex justify-start gap-2">
+        <p className=" text-right pb-4 text-sm font-semibold text-gray-600">
+          {createdAt}
+        </p>
+        <div className="flex justify-end gap-2">
           <LuView
             size={32}
             className="text-slate-500 cursor-pointer"

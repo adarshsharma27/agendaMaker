@@ -21,7 +21,7 @@ const CreateAgendaSchema = z.object({
   description: z
     .string()
     .min(50, { message: "Description is too short" })
-    .max(200, { message: "Description is too long" }),
+    .max(400, { message: "Description is too long" }),
   topics: z
     .array(
       z.object({
@@ -90,9 +90,9 @@ const CreateAgenda = () => {
 
   return (
     <>
-      <div className="container px-6 py-6 mx-auto font-baijamjuree">
+      <div className="container px-6 py-12 mx-auto font-baijamjuree">
         <div className="mx-auto max-w-5xl">
-          <h1 className="text-center text-3xl font-bold text-rose-600 sm:text-3xl">
+          <h1 className="text-center text-3xl pt-4 font-bold text-rose-600 sm:text-3xl">
             Create Agenda
           </h1>
           <div className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">

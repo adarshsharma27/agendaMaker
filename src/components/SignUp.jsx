@@ -49,7 +49,7 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="mx-auto max-w-screen-xl px-4 py-6 sm:px-6 lg:px-8 font-baijamjuree">
+      <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 font-baijamjuree">
         <div className="mx-auto max-w-lg">
           <div className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
             <h1 className="text-center text-3xl font-bold text-rose-600 sm:text-3xl">
