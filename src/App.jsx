@@ -7,6 +7,7 @@ import AboutUs from "./components/AboutUs";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import ViewAgenda from "./components/ViewAgenda";
+import DashBoard from "./components/dashBoard/DashBoard";
 import { account } from "./config/config";
 import { useEffect } from "react";
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/create" element={<CreateAgenda />} />
         <Route path="/view" element={<ViewAgenda />} />
         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/dashboard" element={<DashBoard />} />
       </Routes>
 
       <Footer />

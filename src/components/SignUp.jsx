@@ -26,8 +26,7 @@ const SignUp = () => {
   } = useForm({ resolver: zodResolver(SignUpSchema) });
   const handleSignUp = async (data) => {
     const { name, email, password } = data;
-    const created = moment(new Date()).format("MMM Do YYYY, h:mm:ss a");
-    console.log(created);
+    const createdAt = moment(new Date()).format("MMM Do YYYY, h:mm:ss a");
     try {
       const response = await account.create(ID.unique(), email, password, name);
 
@@ -39,7 +38,7 @@ const SignUp = () => {
           {
             name,
             email,
-            created,
+            createdAt,
           }
         );
       }
