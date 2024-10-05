@@ -20,7 +20,7 @@ const ViewAgenda = () => {
   };
   useEffect(() => {
     getAllAgendas();
-  }, []);
+  }, [isViewModalOpen, isUpdateModalOpen, isDeleteModalOpen]);
   return (
     <>
       <div className="container px-6 py-12 mx-auto font-baijamjuree">

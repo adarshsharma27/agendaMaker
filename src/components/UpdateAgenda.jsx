@@ -51,6 +51,10 @@ const UpdateAgenda = ({ id }) => {
 
     resolver: zodResolver(UpdateAgendaSchema),
   });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "topics",
+  });
   useEffect(() => {
     const getAgenda = async () => {
       try {
@@ -66,12 +70,19 @@ const UpdateAgenda = ({ id }) => {
         setValue("label", label);
         setValue("category", category);
         setValue("description", description);
+        reset({ topics: [] });
+        topics.map((topic, index) => {
+          if (fields.length < topics.length) {
+            append({ name: "" }); // Append new fields if needed
+          }
+          setValue(`topics.${index}.name`, topic);
+        });
 
         console.log(resp);
       } catch (error) {}
     };
     getAgenda();
-  }, [id]);
+  }, [id, append, reset, setValue]);
 
   // Watch the input values
 
@@ -81,11 +92,7 @@ const UpdateAgenda = ({ id }) => {
     !watch("category") ||
     !watch("description");
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "topics",
-  });
-  const handleCreateAgenda = async (data) => {
+  const handleUpdateAgenda = async (data) => {
     const { title, label, category, topics, description } = data;
     const createdAt = moment(new Date()).format("MMM Do YYYY, h:mm:ss a");
     const topicsArray = topics.map((topic) => topic.name);
@@ -105,6 +112,7 @@ const UpdateAgenda = ({ id }) => {
         payload
       );
       console.log("Agenda Updated Successfully");
+      navigate("/view");
     } catch (error) {
       console.log(error.message);
     }
@@ -116,7 +124,7 @@ const UpdateAgenda = ({ id }) => {
         <h1 className="text-center text-3xl py-4 font-bold text-rose-600 sm:text-3xl">
           Update Agenda
         </h1>
-        <form onSubmit={handleSubmit(handleCreateAgenda)}>
+        <form onSubmit={handleSubmit(handleUpdateAgenda)}>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
             <FormField
               label="Title"
@@ -219,7 +227,7 @@ const UpdateAgenda = ({ id }) => {
                 errors.topics
               }
             >
-              Create
+              Update
             </button>
           </div>
         </form>
