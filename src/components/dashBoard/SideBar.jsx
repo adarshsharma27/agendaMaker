@@ -17,8 +17,8 @@ const SideBar = () => {
   return (
     <>
       <div
-        className={`text-gray-600 font-baijamjuree bg-white shadow-xl dark:bg-slate-700  border-r border-gray-200 transition duration-900 ${
-          isExpended ? "sm:w-3/12 w-full" : "w-24"
+        className={`text-gray-600 font-baijamjuree bg-white shadow-xl dark:bg-slate-700  border-r border-gray-200 transition-[width] duration-300 ease-in-out ${
+          isExpended ? "sm:w-64 w-full" : "w-24"
         }`}
       >
         <div className="container flex flex-wrap flex-col">
@@ -27,7 +27,9 @@ const SideBar = () => {
           >
             <div
               to="/"
-              className="hover:border-gray-800 border-b  py-4   border-gray-400 group w-full p-2 flex justify-center items-center gap-1 text-lg transition duration-600"
+              className={`hover:border-gray-800 border-b  py-4   border-gray-400 group w-full p-2 flex  items-center gap-1 text-lg transition duration-600 ${
+                isExpended ? "justify-end" : "justify-center"
+              }`}
               onClick={handleSideBarToggle}
             >
               {isExpended ? (
