@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 import SideBar from "./SideBar";
 import DashBoardCards from "./DashBoardCards";
 const DashBoard = () => {

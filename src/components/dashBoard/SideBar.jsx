@@ -45,7 +45,7 @@ const SideBar = () => {
               )}
             </div>
             <NavLink
-              to="/"
+              to="/dashboard"
               className={`hover:bg-gray-100 hover:border-gray-800 border-b   border-gray-400 group w-full p-2 flex   items-center gap-1 text-lg transition duration-600 ${
                 isExpended ? "justify-start" : "justify-center"
               }`}
@@ -63,7 +63,7 @@ const SideBar = () => {
               </span>{" "}
             </NavLink>
             <NavLink
-              to="/create"
+              to="/dashboard-users"
               className={`hover:bg-gray-100 hover:border-gray-800 border-b   border-gray-400 group w-full p-2 flex   items-center gap-1 text-lg transition duration-600 ${
                 isExpended ? "justify-start" : "justify-center"
               }`}
@@ -81,7 +81,7 @@ const SideBar = () => {
               </span>
             </NavLink>
             <NavLink
-              to="/create"
+              to="/dashboard-agendas"
               className={`hover:bg-gray-100 hover:border-gray-800 border-b   border-gray-400 group w-full p-2 flex   items-center gap-1 text-lg transition duration-600 ${
                 isExpended ? "justify-start" : "justify-center"
               }`}

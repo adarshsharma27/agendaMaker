@@ -16,9 +16,6 @@ const DashBoardTable = ({ users }) => {
               <th className="whitespace-nowrap px-4 py-2  text-lg font-bold text-gray-900">
                 Email
               </th>
-              <th className="whitespace-nowrap px-4 py-2  text-lg font-bold text-gray-900">
-                Joined
-              </th>
             </tr>
           </thead>
 
@@ -36,9 +33,6 @@ const DashBoardTable = ({ users }) => {
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-base font-semibold text-gray-600 dark:text-white">
                   {elements.email}
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-base font-semibold text-gray-600 dark:text-white">
-                  {elements.createdAt}
                 </td>
               </tr>
             ))}

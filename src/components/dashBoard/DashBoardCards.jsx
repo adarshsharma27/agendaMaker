@@ -3,6 +3,7 @@ import DashBoardCharts from "./DashBoardCharts";
 import DashBoardTable from "./DashBoardTable";
 import conf, { databases } from "../../config/config";
 import { LuUsers, LuLibrary } from "react-icons/lu";
+import DashBoardCard from "./DashBoardCard";
 const DashBoardCards = () => {
   const [users, setUsers] = useState([]);
   const [agendas, setAgendas] = useState([]);
@@ -45,40 +46,23 @@ const DashBoardCards = () => {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-            <div className="py-6 sm:mb-0 mb-6 card-shadow-custom  shadow-xl rounded-lg flex flex-wrap gap-2  items-center flex-col">
-              <div className="">
-                <LuUsers
-                  size={50}
-                  className="text-indigo-400 hover:text-green-400 hover:cursor-pointer"
-                />
-              </div>
-              <h2 className="text-6xl  font-bold font-baijamjuree  text-gray-900 dark:text-white capitalize">
-                {users}
-              </h2>
+            <DashBoardCard label={"Total Users"} data={users}>
+              <LuUsers
+                size={50}
+                className="text-indigo-400 hover:text-green-400 hover:cursor-pointer"
+              />
+            </DashBoardCard>
 
-              <p className="text-xl font-bold leading-relaxed  text-gray-600  dark:text-gray-300 capitalize">
-                Total Users
-              </p>
-            </div>
-            <div className="py-6 sm:mb-0 mb-6 card-shadow-custom shadow-xl rounded-lg flex flex-wrap gap-2  items-center flex-col">
-              <div className="">
-                <LuLibrary
-                  size={50}
-                  className="text-red-400 hover:text-green-400 hover:cursor-pointer"
-                />
-              </div>
-              <h2 className="text-6xl font-bold font-baijamjuree  text-gray-900 dark:text-white capitalize">
-                {agendas}
-              </h2>
-
-              <p className="text-xl font-bold leading-relaxed text-gray-600 dark:text-gray-300 capitalize">
-                Total Agendas
-              </p>
-            </div>
+            <DashBoardCard label={"Total Agendas"} data={agendas}>
+              <LuLibrary
+                size={50}
+                className="text-red-400 hover:text-green-400 hover:cursor-pointer"
+              />
+            </DashBoardCard>
           </div>
           <div className="flex flex-wrap sm:flex-row flex-col pt-6">
             <h1 className="sm:w-2/5 text-gray-900 font-bold font-baijamjuree  text-3xl  sm:mb-0 dark:text-white">
-              Users Details
+              Basic Details
             </h1>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">

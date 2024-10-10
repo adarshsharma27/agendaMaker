@@ -10,6 +10,9 @@ import ViewAgenda from "./components/ViewAgenda";
 import DashBoard from "./components/dashBoard/DashBoard";
 import { account } from "./config/config";
 import { useEffect } from "react";
+import DashBoardAgendas from "./components/dashBoard/DashBoardAgendas";
+import DashbaordUsers from "./components/dashBoard/DashBoardUsers";
+import DashBoardUsers from "./components/dashBoard/DashBoardUsers";
 
 function App() {
   useEffect(() => {
@@ -29,6 +32,8 @@ function App() {
         <Route path="/view" element={<ViewAgenda />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/dashboard-users" element={<DashBoardUsers />} />
+        <Route path="/dashboard-agendas" element={<DashBoardAgendas />} />
       </Routes>
 
       <Footer />
