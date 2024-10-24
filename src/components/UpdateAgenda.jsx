@@ -2,12 +2,27 @@ import React, { useState, useEffect } from "react";
 import FormField from "./FormField";
 import { LuMinusSquare, LuPlusSquare } from "react-icons/lu";
 import { z } from "zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import conf, { ID, databases } from "../config/config";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { categoryOptions } from "../utils/categoryOptions";
+import {
+  BtnBold,
+  BtnItalic,
+  Editor,
+  EditorProvider,
+  Toolbar,
+  BtnBulletList,
+  BtnClearFormatting,
+  BtnNumberedList,
+  BtnRedo,
+  BtnStrikeThrough,
+  BtnUnderline,
+  BtnUndo,
+  Separator,
+} from "react-simple-wysiwyg";
 const UpdateAgendaSchema = z.object({
   title: z
     .string()
@@ -198,14 +213,38 @@ const UpdateAgenda = ({ id }) => {
             </div>
           </div>
 
-          <FormField
-            label="Description"
-            name="description"
-            placeholder="Please Enter Description"
-            type="description"
-            register={register}
-            error={errors.description}
-          />
+          <Controller
+                control={control}
+                name="description"
+                render={({ field }) => (
+                  <EditorProvider>
+                    <Editor value={field.value} onChange={field.onChange}>
+                      <Toolbar>
+                        <BtnUndo />
+                        <BtnRedo />
+                        <Separator />
+                        <BtnBold />
+                        <BtnItalic />
+                        <BtnUnderline />
+                        <BtnStrikeThrough />
+                        <Separator />
+                        <BtnNumberedList />
+                        <BtnBulletList />
+                        <Separator />
+                        <BtnClearFormatting />
+
+                        <Separator />
+                      </Toolbar>
+                    </Editor>
+                  </EditorProvider>
+                )}
+              />
+
+              {errors?.description && (
+                <span className="text-red-400 py-2 font-semibold">
+                  {errors?.description?.message}
+                </span>
+              )}
 
           <div className="flex justify-end gap-4">
             <button

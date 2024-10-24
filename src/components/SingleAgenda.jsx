@@ -61,7 +61,7 @@ const SingleAgenda = ({ id }) => {
             </div>
           ))}
         </div>
-        <p className="mt-2 text-base text-gray-500 ">{agenda?.description}</p>
+        <p className="mt-2 text-base text-gray-500 "  dangerouslySetInnerHTML={{ __html: agenda?.description}}></p>
         <p className="mt-2  text-base   text-gray-500">
           Last Updated :{" "}
           <span className="font-semibold ">{agenda?.createdAt}</span>

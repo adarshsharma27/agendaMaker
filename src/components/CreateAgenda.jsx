@@ -2,12 +2,27 @@ import React, { useState } from "react";
 import FormField from "./FormField";
 import { LuMinusSquare, LuPlusSquare } from "react-icons/lu";
 import { z } from "zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import conf, { ID, databases } from "../config/config";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { categoryOptions } from "../utils/categoryOptions";
+import {
+  BtnBold,
+  BtnItalic,
+  Editor,
+  EditorProvider,
+  Toolbar,
+  BtnBulletList,
+  BtnClearFormatting,
+  BtnNumberedList,
+  BtnRedo,
+  BtnStrikeThrough,
+  BtnUnderline,
+  BtnUndo,
+  Separator,
+} from "react-simple-wysiwyg";
 const CreateAgendaSchema = z.object({
   title: z
     .string()
@@ -32,6 +47,11 @@ const CreateAgendaSchema = z.object({
 });
 const CreateAgenda = () => {
   const navigate = useNavigate();
+  const [value, setValue] = useState("simple text");
+
+  function onChange(e) {
+    setValue(e.target.value);
+  }
   const {
     register,
     handleSubmit,
@@ -168,15 +188,39 @@ const CreateAgenda = () => {
                   </button>
                 </div>
               </div>
-
-              <FormField
-                label="Description"
+              <Controller
+                control={control}
                 name="description"
-                placeholder="Please Enter Description"
-                type="description"
-                register={register}
-                error={errors.description}
+                render={({ field }) => (
+                  <EditorProvider>
+                    <Editor value={field.value} onChange={field.onChange}>
+                      <Toolbar>
+                        <BtnUndo />
+                        <BtnRedo />
+                        <Separator />
+                        <BtnBold />
+                        <BtnItalic />
+                        <BtnUnderline />
+                        <BtnStrikeThrough />
+                        <Separator />
+                        <BtnNumberedList />
+                        <BtnBulletList />
+                        <Separator />
+                        <BtnClearFormatting />
+
+                        <Separator />
+                      </Toolbar>
+                    </Editor>
+                  </EditorProvider>
+                )}
               />
+
+              {errors?.description && (
+                <span className="text-red-400 py-2 font-semibold">
+                  {errors?.description?.message}
+                </span>
+              )}
+
 
               <div className="flex justify-end gap-4">
                 <button

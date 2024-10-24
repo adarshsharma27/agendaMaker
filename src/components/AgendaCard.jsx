@@ -86,8 +86,9 @@ const AgendaCard = ({
         <span className="inline-flex my-1 items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
           <p className="whitespace-nowrap text-sm">{category}</p>
         </span>
-        <p className="pb-2 text-base text-gray-500">
-          {description?.substring(0, description.indexOf("."))}...
+        
+        <p className="pb-2 text-base text-gray-500" dangerouslySetInnerHTML={{ __html: description?.substring(0, description.indexOf("."))}}>
+          
         </p>
         <p className=" text-right pb-4 text-sm font-semibold text-gray-600">
           {createdAt}
